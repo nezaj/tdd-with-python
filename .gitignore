@@ -54,5 +54,5 @@ docs/_build/
 
 # Personal
 .env
-dev.db
+*.sqlite3
 *.DS_STORE
