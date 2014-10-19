@@ -48,3 +48,7 @@ unit-test:
 func-test:
 	@echo "Running all functional tests..."
 	$(VENV_ACTIVATE) && ./manage.py test functional_tests
+
+rev:
+	@echo "Generating new migration file..."
+	$(VENV_ACTIVATE) && ./manage.py makemigrations
