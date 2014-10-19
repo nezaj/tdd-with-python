@@ -38,5 +38,13 @@ pylint:
 	pylint *.py
 
 test:
-	@echo "Django tests..."
+	@echo "Running all django tests..."
 	$(VENV_ACTIVATE) && ./manage.py test
+
+unit-test:
+	@echo "Running all unit tests..."
+	$(VENV_ACTIVATE) && ./manage.py test lists
+
+func-test:
+	@echo "Running all functional tests..."
+	$(VENV_ACTIVATE) && ./manage.py test functional_tests
