@@ -1,5 +1,4 @@
 ### In Progress
-* Add unique URL for each list
+* Refactor some duplication in urls.py
 
 ### Backlog
-* Add a url for creating new items for a list via a POST
