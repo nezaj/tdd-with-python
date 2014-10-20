@@ -57,7 +57,7 @@ reports=no
 
 # Template used to display messages. This is a python new-style format string
 # used to format the massage information. See doc for all details
-msg-template="{line:3d}: [{msg_id}] '{symbol}' {msg}"
+msg-template="Line {line:3d}: [{msg_id}] '{symbol}' {msg}"
 
 [SIMILARITIES]
 
@@ -84,7 +84,7 @@ ignore-mixin-members=no
 # (useful for classes with attributes dynamically set).
 
 # Ignore Django models that have dynamic properties
-ignored-classes=Item
+ignored-classes=Item,List,WSGIRequest
 
 # When zope mode is activated, add a predefined set of Zope acquired attributes
 # to generated-members.
