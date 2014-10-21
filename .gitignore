@@ -52,6 +52,9 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
+# Collected static files
+collectstatic/
+
 # Personal
 .env
 *.sqlite3
