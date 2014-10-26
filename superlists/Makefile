@@ -49,6 +49,10 @@ func-test:
 	@echo "Running all functional tests..."
 	$(VENV_ACTIVATE) && ./manage.py test functional_tests
 
+live-test:
+	@echo "Running all functional tests..."
+	$(VENV_ACTIVATE) && ./manage.py test functional_tests --liveserver=nezaj-lists.com
+
 rev:
 	@echo "Generating new migration file..."
 	$(VENV_ACTIVATE) && ./manage.py makemigrations
