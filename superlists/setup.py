@@ -8,7 +8,8 @@ dependencies = [
     "pylint>=1.2.1",
     "selenium>=2.43.0",
     # Additional packages
-    "Django==1.7"
+    "Django==1.7",
+    "gunicorn>=19.1.1"
 ]
 
 setup(

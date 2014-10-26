@@ -53,7 +53,7 @@ coverage.xml
 docs/_build/
 
 # Collected static files
-collectstatic/
+static/
 
 # Personal
 .env
