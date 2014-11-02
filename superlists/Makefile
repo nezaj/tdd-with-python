@@ -20,7 +20,7 @@ check:
 
 virtualenv:
 	test -d $(VENV_PATH) || $(VIRTUALENV) $(VENV_PATH)
-	$(VENV_ACTIVATE) && python setup.py --quiet develop
+	$(VENV_ACTIVATE) && pip install -r requirements.txt
 	rm -rf superlists.egg-info
 
 pep8:

@@ -9,7 +9,7 @@ dependencies = [
     "selenium>=2.43.0",
     # Additional packages
     "Django==1.7",
-    "gunicorn>=19.1.1"
+    "gunicorn>=19.1.1",
 ]
 
 setup(
