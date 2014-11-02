@@ -1,11 +1,9 @@
 """
-Django settings for superlists project.
+These are the base settings that all enviornments import
+To change a setting for a particular enviornment simply override it in that
+module.
 
-For more information on this file, see
-https://docs.djangoproject.com/en/1.7/topics/settings/
-
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.7/ref/settings/
+e.g. to set DEBUG = False in prod.py to override it
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
