@@ -56,3 +56,11 @@ live-test:
 rev:
 	@echo "Generating new migration file..."
 	$(VENV_ACTIVATE) && ./manage.py makemigrations
+
+collectstatic:
+	@echo "Collecting static files..."
+	$(VENV_ACTIVATE) && ./manage.py collectstatic --noinput
+
+db-migrate:
+	@echo "Upgrading database to head revision..."
+	$(VENV_ACTIVATE) && ./manage.py migrate --noinput
