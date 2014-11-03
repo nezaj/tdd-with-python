@@ -5,7 +5,7 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
-class NewVisitorTest(StaticLiveServerTestCase):
+class FunctionalTest(StaticLiveServerTestCase):
 
     @classmethod
     def setUpClass(cls):
@@ -35,6 +35,9 @@ class NewVisitorTest(StaticLiveServerTestCase):
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_elements_by_tag_name('tr')
         self.assertIn(row_text, [row.text for row in rows])
+
+
+class NewVisitorTest(FunctionalTest):
 
     def test_start_and_retrieve_list(self):
         # Edith goes to home page
@@ -100,6 +103,8 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.assertIn('Buy milk', page_text)
 
         # Satisfied, they both go back to sleep
+
+class LayoutAndStylingTest(FunctionalTest):
 
     def test_layout_and_styling(self):
         # Edith goes to the home page
