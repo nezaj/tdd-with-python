@@ -32,7 +32,8 @@ def deploy():
         _db_migrate()
     update_server_configs(source_folder)
     restart_services()
-    print(red("Done!"))
+    _tag_live()
+    print(red("Deploy complete!"))
 
 @task
 def update_server_configs(source_folder):
@@ -99,3 +100,8 @@ def _collectstatic():
 def _db_migrate():
     print(green("Migrating the database..."))
     sudo('make db-migrate')
+
+def _tag_live():
+    print(green("Updating LIVE tag..."))
+    local('git tag -f LIVE')
+    local('git push -f origin LIVE')
