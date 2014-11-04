@@ -49,7 +49,7 @@ class ListViewTest(TestCase):
         list_ = List.objects.create()
         response = self.client.post(
             '/lists/{}/'.format(list_.id),
-            data={'item_text': ''}
+            data={'text': ''}
         )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'list.html')
@@ -60,7 +60,7 @@ class NewListTest(TestCase):
 
     def test_save_after_post(self):
         self.client.post('/lists/new',
-                         data={'item_text': 'A new list item'})
+                         data={'text': 'A new list item'})
 
         self.assertEqual(Item.objects.count(), 1)
         new_item = Item.objects.first()
@@ -68,20 +68,20 @@ class NewListTest(TestCase):
 
     def test_redirects_after_post(self):
         response = self.client.post('/lists/new',
-                                    data={'item_text': 'A new list item'})
+                                    data={'text': 'A new list item'})
 
         new_list = List.objects.first()
         self.assertRedirects(response, '/lists/{}/'.format(new_list.id))
 
     def test_render_home_on_validation_errors(self):
-        response = self.client.post('/lists/new', data={'item_text': ''})
+        response = self.client.post('/lists/new', data={'text': ''})
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'home.html')
         expected_error = escape("You can't have an empty list item")
         self.assertContains(response, expected_error)
 
     def test_invalid_list_items_arent_saved(self):
-        self.client.post('/lists/new', data={'item_text': ''})
+        self.client.post('/lists/new', data={'text': ''})
         self.assertEqual(List.objects.count(), 0)
         self.assertEqual(Item.objects.count(), 0)
 
@@ -89,7 +89,7 @@ class NewListTest(TestCase):
         correct_list = List.objects.create()
 
         self.client.post('/lists/{}/'.format(correct_list.id),
-                         data={'item_text': 'A new item for an existing list'})
+                         data={'text': 'A new item for an existing list'})
 
         self.assertEqual(Item.objects.count(), 1)
         new_item = Item.objects.first()
@@ -102,7 +102,7 @@ class NewListTest(TestCase):
 
         response = self.client.post(
             '/lists/{}/'.format(correct_list.id),
-            data={'item_text': 'A new item for an existing list'}
+            data={'text': 'A new item for an existing list'}
         )
 
         self.assertRedirects(response, '/lists/{}/'.format(correct_list.id))
