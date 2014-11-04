@@ -17,7 +17,7 @@ def new_list(request):
         error = "You can't have an empty list item"
         return render(request, 'home.html', {'error': error})
 
-    return redirect('/lists/{}/'.format(list_.id))
+    return redirect(list_)
 
 def view_list(request, list_id):
     list_ = List.objects.get(id=list_id)
@@ -26,7 +26,7 @@ def view_list(request, list_id):
         try:
             item.full_clean()
             item.save()
-            return redirect('/lists/{}/'.format(list_.id))
+            return redirect(list_)
         except ValidationError:
             error = "You can't have an empty list item"
             return render(request, 'list.html', {'list': list_, 'error': error})
