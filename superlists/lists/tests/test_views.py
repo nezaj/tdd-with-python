@@ -75,12 +75,10 @@ class NewListTest(TestCase):
         self.assertEqual(List.objects.count(), 0)
         self.assertEqual(Item.objects.count(), 0)
 
-class NewItemTest(TestCase):
-
     def test_can_post_to_existing_list(self):
         correct_list = List.objects.create()
 
-        self.client.post('/lists/{}/add_item'.format(correct_list.id),
+        self.client.post('/lists/{}/'.format(correct_list.id),
                          data={'item_text': 'A new item for an existing list'})
 
         self.assertEqual(Item.objects.count(), 1)
@@ -89,11 +87,11 @@ class NewItemTest(TestCase):
         self.assertEqual(new_item.text, 'A new item for an existing list')
         self.assertEqual(new_item.list, correct_list)
 
-    def test_redirects_to_list_view(self):
+    def test_post_redirects_to_list_view(self):
         correct_list = List.objects.create()
 
         response = self.client.post(
-            '/lists/{}/add_item'.format(correct_list.id),
+            '/lists/{}/'.format(correct_list.id),
             data={'item_text': 'A new item for an existing list'}
         )
 
