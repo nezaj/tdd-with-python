@@ -1,3 +1,6 @@
+import os
+import base64
+
 from .base import *
 
 # We don't want this in stage

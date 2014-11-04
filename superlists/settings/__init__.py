@@ -6,7 +6,7 @@ Default enviornment is dev
 """
 import os
 
-env_to_module = {
+app_env_settings = {
     'dev': 'settings.dev',
     'stage': 'setting.stage',
     'prod': 'settings.prod',
@@ -14,4 +14,4 @@ env_to_module = {
     'default': 'settings.dev'
 }
 
-app_config = env_to_module[os.getenv('APP_ENV', 'default')]
+app_config = app_env_settings[os.getenv('APP_ENV', 'default')]
