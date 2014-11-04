@@ -46,6 +46,17 @@ class ListViewTest(TestCase):
         self.assertNotContains(response, 'other list item 1')
         self.assertNotContains(response, 'other list item 2')
 
+    def test_render_list_view_on_validation_errors(self):
+        list_ = List.objects.create()
+        response = self.client.post(
+            '/lists/{}/'.format(list_.id),
+            data={'item_text': ''}
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'list.html')
+        expected_error = escape("You can't have an empty list item")
+        self.assertContains(response, expected_error)
+
 class NewListTest(TestCase):
 
     def test_save_after_post(self):
