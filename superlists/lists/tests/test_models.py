@@ -18,16 +18,16 @@ class ItemModelTest(TestCase):
         item = Item(text='Moop', list=list_2)
         item.full_clean()  # Should not raise error
 
+    def test_default_text(self):
+        item = Item()
+        self.assertEqual(item.text, '')
+
     def test_duplicate_items_are_invalid(self):
         list_ = List.objects.create()
         Item.objects.create(text='Moop', list=list_)
         with self.assertRaises(ValidationError):
             item = Item(text='Moop', list=list_)
             item.full_clean()
-
-    def test_default_text(self):
-        item = Item()
-        self.assertEqual(item.text, '')
 
     def test_item_is_related_to_list(self):
         list_ = List.objects.create()

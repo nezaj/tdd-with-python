@@ -46,3 +46,9 @@ class ItemValidationTest(FunctionalTest):
         self.check_row_in_table('1: Buy milk')
         error = self.browser.find_element_by_css_selector('.has-error')
         self.assertEqual(error.text, DUPLICATE_ITEM_ERROR)
+
+        # So she adds a different item
+        self.get_item_input_box().clear()
+        self.get_item_input_box().send_keys('Buy cheese\n')
+        self.check_row_in_table('1: Buy milk')
+        self.check_row_in_table('2: Buy cheese')
