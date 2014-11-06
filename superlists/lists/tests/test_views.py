@@ -1,10 +1,12 @@
+from unittest import skip
+
 from django.core.urlresolvers import resolve
 from django.template.loader import render_to_string
 from django.test import TestCase
 from django.http import HttpRequest
 from django.utils.html import escape
 
-from lists.forms import EMPTY_ITEM_ERROR, ItemForm
+from lists.forms import DUPLICATE_ITEM_ERROR, EMPTY_ITEM_ERROR, ItemForm
 from lists.models import Item, List
 from lists.views import home_page
 
@@ -38,6 +40,17 @@ class ListViewTest(TestCase):
         self.assertContains(response, 'itemey 2')
         self.assertNotContains(response, 'other list item 1')
         self.assertNotContains(response, 'other list item 2')
+
+    @skip
+    def test_duplicate_item_validation(self):
+        list_ = List.objects.create()
+        item = Item.objects.create(list=list_, text='Moop')
+        resp = self.client.post('/lists/{}/'.format(list_.id),
+                                data={'text': 'Moop'})
+
+        self.assertContains(resp,escape(DUPLICATE_ITEM_ERROR))
+        self.assertTemplateUsed(resp, 'list.html')
+        self.assertEqual(Item.objects.count(), 1)
 
     def test_invalid_input_renders_list_template(self):
         response = self.post_invalid_input()
