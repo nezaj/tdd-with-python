@@ -1,7 +1,9 @@
 import os
 
-from fabric.api import cd, env, local, run, task, sudo
-from fabric.contrib.files import append, exists, sed
+# Fabric is not part of virtualenv
+# pylint: disable=import-error
+from fabric.api import cd, env, local, task, sudo
+from fabric.contrib.files import exists
 from fabric.colors import green, red
 
 env.user = 'javerbukh'

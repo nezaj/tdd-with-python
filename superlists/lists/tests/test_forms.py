@@ -25,7 +25,7 @@ class ExistingFormTest(TestCase):
 
     def test_validate_duplicate_items(self):
         list_ = List.objects.create()
-        item = Item.objects.create(list=list_, text='Moop')
+        Item.objects.create(list=list_, text='Moop')
         form = ExistingListItemForm(for_list=list_, data={'text': 'Moop'})
         self.assertFalse(form.is_valid())
         self.assertEqual(form.errors['text'], [DUPLICATE_ITEM_ERROR])

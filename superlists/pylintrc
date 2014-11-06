@@ -23,21 +23,22 @@ persistent=no
 # no Warning level messages displayed, use"--disable=all --enable=classes
 # --disable=W"
 
-# E1120: No value for argument in constructor (barfs on SQLAlchemy type classes)
+# E1120: No value for argument in constructor (barfs on Django type classes)
+# E1123: Unexpected keyword argument (see above)
 # W0142: Used * or ** magic (apparently "magic" encompasses many ordinary uses)
-# W0232: Class has no __init__ (our SQLAlchemy classes dynamically define it)
+# W0232: Class has no __init__ (our Django classes dynamically define it)
 # W0621: Redefining name from outer scope (I don't think this is always bad style)
 # W0622: Redefining built-in (it's useful to redefine id in SQLAlchemy classes)
 # R0903: Too few public methods on class (we have ORM-ish row type classes)
 # C0111: Missing docstring (it complains about too much, e.g. empty __init__.py)
 # I0011: Locally disabling message (I disabled it so you wouldn't complain!)
-# I0012: ditto
+# I0012: Locally enabling a message (see above)
 # R0904: Too many public methods (I can't control library classes!)
 # R0902: Too many instance attributes (This doesn't seem super important)
 # R0901: Too many ancestors (see R0904)
 # R0923: Interface not implemented, pylint is overly-opinionated
 # W0511: Chokes on FIXME / TODO comments, which seem reasonable
-disable=similarities,E1120,W0142,W0232,W0621,W0622,R0903,C0111,I0011,I0012,R0904,R0902,R0901,R0923,W0511
+disable=similarities,E1120,E1123,W0142,W0232,W0621,W0622,R0903,C0111,I0011,I0012,R0904,R0902,R0901,R0923,W0511
 
 
 [REPORTS]
@@ -83,8 +84,8 @@ ignore-mixin-members=no
 # List of classes names for which member attributes should not be checked
 # (useful for classes with attributes dynamically set).
 
-# Ignore Django models that have dynamic properties
-ignored-classes=Item,List,WSGIRequest
+# Ignore Django models and forms that have dynamic properties
+ignored-classes=ModelForm,Item,List,WSGIRequest,ItemForm,ExistingListItemForm
 
 # When zope mode is activated, add a predefined set of Zope acquired attributes
 # to generated-members.

@@ -1,15 +1,9 @@
-from unittest import skip
-
-from django.core.urlresolvers import resolve
-from django.template.loader import render_to_string
 from django.test import TestCase
-from django.http import HttpRequest
 from django.utils.html import escape
 
 from lists.forms import (DUPLICATE_ITEM_ERROR, EMPTY_ITEM_ERROR,
                          ExistingListItemForm, ItemForm)
 from lists.models import Item, List
-from lists.views import home_page
 
 class HomePageTest(TestCase):
 
@@ -56,11 +50,11 @@ class ListViewTest(TestCase):
 
     def test_duplicate_item_validation(self):
         list_ = List.objects.create()
-        item = Item.objects.create(list=list_, text='Moop')
+        Item.objects.create(list=list_, text='Moop')
         resp = self.client.post('/lists/{}/'.format(list_.id),
                                 data={'text': 'Moop'})
 
-        self.assertContains(resp,escape(DUPLICATE_ITEM_ERROR))
+        self.assertContains(resp, escape(DUPLICATE_ITEM_ERROR))
         self.assertTemplateUsed(resp, 'list.html')
         self.assertEqual(Item.objects.count(), 1)
 
@@ -70,7 +64,7 @@ class ListViewTest(TestCase):
         self.assertTemplateUsed(response, 'list.html')
 
     def test_invalid_input_saves_nothing_to_db(self):
-        response = self.post_invalid_input()
+        self.post_invalid_input()
         self.assertEqual(Item.objects.count(), 0)
 
     def test_invalid_input_passes_item_form(self):

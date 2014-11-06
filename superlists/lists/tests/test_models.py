@@ -11,7 +11,8 @@ class ItemModelTest(TestCase):
         with self.assertRaises(ValidationError):
             item.full_clean()
 
-    def test_CAN_save_same_item_to_diff_list(self):
+    # pylint: disable=no-self-use
+    def test_can_save_same_item_to_diff_list(self):
         list_1 = List.objects.create()
         Item.objects.create(text='Moop', list=list_1)
         list_2 = List.objects.create()

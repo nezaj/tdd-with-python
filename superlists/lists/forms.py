@@ -31,6 +31,7 @@ class ExistingListItemForm(ItemForm):
         super().__init__(*args, **kwargs)
         self.instance.list = for_list
 
+    # pylint: disable=arguments-differ
     def save(self):
         return forms.models.ModelForm.save(self)
 
