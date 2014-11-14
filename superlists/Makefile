@@ -1,14 +1,22 @@
 MAKEFLAGS = --no-print-directory --always-make --silent
 MAKE = make $(MAKEFLAGS)
 
-# We're using python3 for this project
+# Use python3 for this project
 PY3_PATH = /usr/local/bin/python3
 VENVFLAGS = --python=$(PY3_PATH)
 VIRTUALENV = virtualenv $(VENVFLAGS)
 
+# Follow convention of creating virtualenvs in ~/.virtualenvs
 VENV_NAME = superlists
 VENV_PATH = ~/.virtualenvs/$(VENV_NAME)
 VENV_ACTIVATE = . $(VENV_PATH)/bin/activate
+
+# Don't analyze library/minified Javascript
+JS_ROOT = lists/static/
+JS_FILES = $(shell find $(JS_ROOT) -name '*.js' \
+             -not -path '$(JS_ROOT)/bootstrap/*.js' \
+             -not -name 'qunit.js' \
+             -not -name '*.min.js')
 
 clean:
 	find . -name "*.pyc" -print -delete
@@ -36,6 +44,10 @@ pylint:
 	pylint lists && \
 	pylint superlists && \
 	pylint *.py
+
+jshint:
+	@echo "Running JSHint..."
+	jshint $(JS_FILES)
 
 test:
 	@echo "Running all django tests..."
